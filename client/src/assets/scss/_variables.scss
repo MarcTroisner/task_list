@@ -1,0 +1,25 @@
+// ELEMENT COLORS
+$colors: (
+  main: #0FCA43,
+  btn-delete: #E70A0A,
+  btn-keep: #CFCFCF,
+  main-bg: #FFFFFF,
+  task-bg: #F8F8F8,
+  task-delete-bg: #D7D7D7,
+  overlay-bg: rgba(0, 0, 0, 0.6),
+);
+
+// PLACEHOLDER
+$placeholder-font: 'Poppins';
+$placeholder-style: italic;
+$placeholder-color: #999999;
+
+// TASK
+$task-font: 'Poppins';
+$task-color: #1C1C1C;
+
+// BUTTONS
+$btn-font: 'Poppins';
+$btn-delete-color: #FFFFFF;
+$btn-keep-color: #212121;
+$btn-submit-color: #FFFFFF;
