@@ -4,7 +4,7 @@ $colors: (
   btn-delete: #E70A0A,
   btn-keep: #CFCFCF,
   main-bg: #FFFFFF,
-  task-bg: #F8F8F8,
+  task-bg: #eeeeee,
   task-delete-bg: #D7D7D7,
   overlay-bg: rgba(0, 0, 0, 0.6),
 );
@@ -17,6 +17,8 @@ $placeholder-color: #999999;
 // TASK
 $task-font: 'Poppins';
 $task-color: #1C1C1C;
+$date-color: #808080;
+$date-style: italic;
 
 // BUTTONS
 $btn-font: 'Poppins';

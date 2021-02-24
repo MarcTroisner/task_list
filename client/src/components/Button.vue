@@ -1,5 +1,5 @@
 <template>
-  <input type="button" :class="type" :value="btnTxt">
+  <input type="submit" :class="type" :value="btnTxt">
 </template>
 
 <script>
@@ -12,7 +12,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-input[type="button"] {
+input[type="submit"] {
   border: none;
   outline: none;
   width: 9em;
