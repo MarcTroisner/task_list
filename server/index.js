@@ -13,8 +13,11 @@ app.use(bodyParser.json());
 
 // MONGODB CONNECTION
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }, (error) => {
-  if (error) console.log('Connection error');
-  console.log('Connected to MongoDB');
+  if (error) {
+    console.log('Connection error');
+  } else {
+    console.log('Connected to MongoDB');
+  }
 });
 
 // ROUTES

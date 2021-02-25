@@ -1,19 +1,36 @@
 <template>
-  <div class="taskInputContainer">
-    <input type="text" placeholder="Your fancy task">
+  <form @submit.prevent="postTask" class="taskInputContainer">
+    <input
+    v-model="taskTxt"
+    type="text"
+    placeholder="Your fancy task"
+    >
     <Button
     btnTxt="Add task"
     type="btn-submit"
     />
-  </div>
+  </form>
 </template>
 
 <script>
 import Button from '@/components/Button.vue';
+import axios from 'axios';
 
 export default {
+  data() {
+    return {
+      taskTxt: null,
+    };
+  },
   components: {
     Button,
+  },
+  methods: {
+    async postTask() {
+      await axios.post('http://localhost:5000/tasks', { data: { task: this.taskTxt } });
+      this.taskTxt = null;
+      this.$emit('refresh');
+    },
   },
 };
 </script>

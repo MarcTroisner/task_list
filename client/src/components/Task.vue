@@ -1,10 +1,10 @@
 <template>
   <div class="taskContainer">
     <div class="content">
-      <p class="date">{{ data.created }}</p>
+      <p class="date">{{ displayCreated }}</p>
       <p>{{ data.task }}</p>
     </div>
-    <div class="deleteBtn">
+    <div @click="togglePopup" class="deleteBtn">
       <svg viewBox="0 0 16 21" fill="none">
         <g clip-path="url(#clip0)">
           <path d="M16 1.14286H12L10.8571 0H5.14286L4 1.14286H0V3.42857H16V1.14286ZM1.14286
@@ -19,13 +19,46 @@
         </defs>
       </svg>
     </div>
+    <Popup
+    @delete="handler"
+    @keep="togglePopup"
+    v-if="showPopup === true" />
   </div>
 </template>
 
 <script>
+import Popup from '@/components/Popup.vue';
+import axios from 'axios';
+
 export default {
+  data() {
+    return {
+      showPopup: false,
+    };
+  },
   props: {
     data: Object,
+  },
+  components: {
+    Popup,
+  },
+  computed: {
+    displayCreated() {
+      return this.data.created.substring(0, 10);
+    },
+  },
+  methods: {
+    async deleteTask() {
+      await axios.delete('http://localhost:5000/tasks', { data: { id: this.data._id } });
+      this.$emit('refresh');
+    },
+    togglePopup() {
+      this.showPopup = !this.showPopup;
+    },
+    handler() {
+      this.togglePopup();
+      this.deleteTask();
+    },
   },
 };
 </script>
@@ -53,7 +86,7 @@ export default {
   }
   .content {
     padding: 1.8em 3em;
-    padding-top: 2em;
+    padding-top: 2.5em;
     position: relative;
     font-family: $task-font;
     color: $task-color;
