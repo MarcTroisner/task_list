@@ -1,27 +1,27 @@
 // ELEMENT COLORS
 $colors: (
-  main: #0FCA43,
-  btn-delete: #E70A0A,
-  btn-keep: #CFCFCF,
-  main-bg: #FFFFFF,
-  task-bg: #eeeeee,
-  task-delete-bg: #D7D7D7,
+  main: rgb(15, 202, 67),
+  btn-delete: rgb(231, 10, 10),
+  btn-keep: rgb(207, 207, 207),
+  main-bg: rgb(255, 255, 255),
+  task-bg: rgb(238, 238, 238),
+  task-delete-bg: rgb(215, 215, 215),
   popup-bg: rgba(0, 0, 0, 0.6),
 );
 
 // PLACEHOLDER
 $placeholder-font: 'Poppins';
 $placeholder-style: italic;
-$placeholder-color: #999999;
+$placeholder-color: rgb(153, 153, 153);
 
 // TASK
 $task-font: 'Poppins';
-$task-color: #1C1C1C;
-$date-color: #808080;
+$task-color: rgb(28, 28, 28);
+$date-color: rgb(128, 128, 128);
 $date-style: italic;
 
 // BUTTONS
 $btn-font: 'Poppins';
-$btn-delete-color: #FFFFFF;
-$btn-keep-color: #212121;
-$btn-submit-color: #FFFFFF;
+$btn-delete-color: rgb(255, 255, 255);
+$btn-keep-color: rgb(33, 33, 33);
+$btn-submit-color: rgb(255, 255, 255);

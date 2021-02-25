@@ -18,6 +18,7 @@ input[type="submit"] {
   width: 9em;
   height: 100%;
   cursor: pointer;
+  transition: 0.5s;
 }
 .btn-delete {
   background: map-get($colors, btn-delete);

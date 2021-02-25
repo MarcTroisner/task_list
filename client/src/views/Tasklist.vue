@@ -1,9 +1,20 @@
 <template>
   <div class="taskListView">
-    <TaskInput
-    class="newTask"
-    @refresh="fetchTasks"
-    />
+    <div class="newTaskContainer">
+      <TaskInput
+      class="newTask"
+      @refresh="fetchTasks"
+      @error-null="errorObj.emptyInput = true"
+      @catched-error="errorObj.noConnection = true"
+      />
+      <p class="error"
+      v-if="errorObj.emptyInput === true">Please make sure your input isn't empty.</p>
+      <p class="error"
+      v-if="errorObj.noConnection === true">No connection to server. Try again later.</p>
+    </div>
+    <p class="noTasks" v-if="fetchFinished && tasks[0] === undefined">
+      Seems like you don't have any tasks yet...
+    </p>
     <ul v-if="fetchFinished">
       <li v-for="task in tasks" :key="task._id">
         <Task
@@ -26,6 +37,10 @@ export default {
     return {
       tasks: null,
       fetchFinished: false,
+      errorObj: {
+        emptyInput: false,
+        noConnection: true,
+      },
     };
   },
   components: {
@@ -33,15 +48,19 @@ export default {
   },
   methods: {
     async fetchTasks() {
-      await axios.get('http://localhost:5000/tasks')
-        .then((res) => {
-          this.fetchFinished = false;
-          this.tasks = res.data.tasks;
-          this.fetchFinished = true;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      try {
+        const res = await axios.get('http://localhost:5000/tasks');
+        this.resetVariables();
+        this.tasks = res.data.tasks;
+        this.fetchFinished = true;
+      } catch (error) {
+        this.errorObj.noConnection = true;
+      }
+    },
+    resetVariables() {
+      this.fetchFinished = false;
+      this.errorObj.emptyInput = false;
+      this.errorObj.noConnection = false;
     },
   },
   mounted() {
@@ -57,7 +76,18 @@ export default {
 ul {
   list-style-type: none;
 }
-.newTask {
+.newTaskContainer {
   margin-bottom: 5em;
+  .error {
+    margin-top: 2em;
+    color: map-get($colors, btn-delete);
+    font-family: $task-font;
+    text-align: center;
+  }
+}
+.noTasks {
+  color: $task-color;
+  font-family: $task-font;
+  text-align: center;
 }
 </style>

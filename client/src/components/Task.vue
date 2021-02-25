@@ -4,7 +4,10 @@
       <p class="date">{{ displayCreated }}</p>
       <p>{{ data.task }}</p>
     </div>
-    <div @click="togglePopup" class="deleteBtn">
+    <div
+    @click="togglePopup"
+    class="deleteBtn"
+    >
       <svg viewBox="0 0 16 21" fill="none">
         <g clip-path="url(#clip0)">
           <path d="M16 1.14286H12L10.8571 0H5.14286L4 1.14286H0V3.42857H16V1.14286ZM1.14286
@@ -49,8 +52,12 @@ export default {
   },
   methods: {
     async deleteTask() {
-      await axios.delete('http://localhost:5000/tasks', { data: { id: this.data._id } });
-      this.$emit('refresh');
+      try {
+        await axios.delete('http://localhost:5000/tasks', { data: { id: this.data._id } });
+        this.$emit('refresh');
+      } catch (error) {
+        this.$emit('error');
+      }
     },
     togglePopup() {
       this.showPopup = !this.showPopup;
@@ -79,6 +86,7 @@ export default {
     background: map-get($colors, task-delete-bg);
     border-radius: 0 5px 5px 0;
     cursor: pointer;
+    transition: 0.5s;
     svg {
       width: 1.6em;
       height: 1.6em;

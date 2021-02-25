@@ -27,9 +27,17 @@ export default {
   },
   methods: {
     async postTask() {
-      await axios.post('http://localhost:5000/tasks', { data: { task: this.taskTxt } });
-      this.taskTxt = null;
-      this.$emit('refresh');
+      try {
+        if (this.taskTxt === null) {
+          this.$emit('error-null');
+          return;
+        }
+        await axios.post('http://localhost:5000/tasks', { data: { task: this.taskTxt } });
+        this.taskTxt = null;
+        this.$emit('refresh');
+      } catch (error) {
+        this.$emit('catched-error');
+      }
     },
   },
 };
